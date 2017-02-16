@@ -1,173 +1,60 @@
-body {
-    font-family: 'Open Sans', sans-serif;
-}
+// counter code
+var button = document.getElementById("counter");
 
-.pad-top {
-    padding-top:50px;
-}
-.pad-top-bottom {
-     padding-top:20px;
-      padding-bottom:30px;
-}
-.text-center {
-    text-align:center;
-}
-
-section {
-    padding:40px 0px 40px 0px;
-}
-p {
-    line-height:30px;
-    font-size:16px;
-    padding:10px 0px 10px 0px;
-}
- h1 {
-font-weight: 900;
-color:rgb(255, 15, 101);
-}
-
-
-.custom-btn-one {
-    color: #fff;
-   background-color:rgba(0, 0, 0, 0.70);
-   border-color: rgb(255, 15, 101);
-}
-    .custom-btn-one:hover {
-         color: #fff;
-        background-color:rgba(0, 0, 0, 0.40);
-    }
-    .btn-style-two {
-    color: #fff;
-background-color: #797979;
-border-color: #929292;
-border-radius: 0px!important;
--webkit-border-radius:  0px!important;
--moz-border-radius:  0px!important;
-}
-.btn-style-two:hover {
-    color: #fff;
-}
-
- .btn-style-three {
-    color: #fff;
-background-color: #3BAD72;
-border-color: #44EBB5;
-border-radius: 0px!important;
--webkit-border-radius:  0px!important;
--moz-border-radius:  0px!important;
-}
-.btn-style-three:hover {
-    color: #fff;
-}
-
-#home-sec {
+button.onclick = function() {
     
-    background: url(https://lh3.googleusercontent.com/NaFPKOuM4ntE9zif1h-46o_AWXIRQtg4JMTfgjNDLvaQadlWZaUEtBAhrMTw_TMdCnDZXuASV00UK5A=w1366-h662-rw) no-repeat center center;
-padding: 0;
--webkit-background-size: cover;
-background-size: cover;
-background-attachment: fixed;
-color:#fff;
+    // create a request object
+    var request = new XMLHttpRequest();
+    
+    // capture the response and store it in a variable
+    request.onreadystatechange = function() {
+      if (request.readyState === XMLHttpRequest.DONE) {
+          // take some action
+          if (request.status === 200) {
+              var counter = request.responseText;
+              var span = document.getElementById("count");
+              span.innerHTML = counter.toString();
+          }
+      }  
+      // not done yet
+    };
+    
+    // make the request
+    request.open('GET', 'http://darkfist.imad.hasura-app.io/counter', true);
+    request.send(null);
+};
 
 
-}
-    #home-sec .overlay {
-        padding-top:100px;
-        background:rgba(0, 0, 0, 0.80);
-        min-height:790px;
-    }
- #home-sec .main-img {
-     
-    max-height:200px;
-    border:5px solid rgb(255, 15, 101);
-    cursor:pointer;
-}
+// submit name
+var submit = document.getElementById('submit_btn');
 
-    #home-sec a,#home a:hover {
-        text-decoration:none;
-    }
-#home-sec .main-img-2 {
-     max-height:200px;
-   border:5px solid rgb(255, 15, 101);
-  cursor:pointer;
-}
- 
-
-#home-sec h1 {
-font-weight: 900;
-padding: 20px 0px 0px 0px;
-}
-#home-sec h2 {
-font-weight: 400;
-padding: 0px 0px 30px 0px;
-color:#fff;
-}
-#home-sec h3 {
-padding: 5px 0px;
-color:#fff;
-font-weight:800;
-}
-    #home-sec small {
-        color:#fff;
-    }
-.icon-round {
-font-size: 30px;
-height: 60px;
-width: 60px;
-line-height: 60px;
-color: #fff;
-border: 2px solid #fff;
-text-align: center;
-border-radius: 50%;
--webkit-transition: 400ms;
--moz-transition: 400ms;
--o-transition: 400ms;
-transition: 400ms;
-cursor: pointer;
-}
-    .icon-round:hover {
-        background-color:rgb(255, 15, 101);
-    }
-
-.icon-round-active {
-      background-color:rgb(255, 15, 101);
-}
-
- h1 {
-color:#00ADAD;
-}
-
-.custom-btn-one {
-   border-color: #00ADAD;
-}
-   
- #home-sec .main-img {     
-   border:5px solid #00ADAD;
-}
- #home-sec .main-img-2 {
-   border:5px solid #00ADAD;
-}
-    .icon-round:hover {
-        background-color:#00ADAD;
-    }
-
-.icon-round-active {
-      background-color:#00ADAD;
-}
-
-.total-likes {
-  border:2px solid #FFFFFF;
-  border-radius: 50%; 
-  padding: 12px 18px;
-}
-
-.total-likes:hover {
-        background-color:#00ADAD;
-    }
-
-
-.likes-container {
-  margin-top: 9px;
-  margin-bottom: 10px;
-}
-
+submit.onclick = function() {
+    
+    // create a request object
+    var request = new XMLHttpRequest();
+    
+    // capture the response and store it in a variable
+    request.onreadystatechange = function() {
+      if (request.readyState === XMLHttpRequest.DONE) {
+          // take some action
+          if (request.status === 200) {
+              // capture a list of names and render it
+              var names = request.responseText;
+              names = JSON.parse(names);
+              var list = "";
+              for (var i=0; i<names.length; i++) {
+                  list += '<li>' + names[i] + '</li>';
+              }
+              var ul = document.getElementById('namelist');
+              ul.innerHTML = list;
+          }
+      }  
+      // not done yet
+    };
+    
+    // make the request
+    var nameInput = document.getElementById("name");
+    var name = nameInput.value;
+    request.open('GET', 'http://darkfist.imad.hasura-app.io/submit-name?name=' + name, true);
+    request.send(null);
+};
