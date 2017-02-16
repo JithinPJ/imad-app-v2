@@ -20,7 +20,7 @@ button.onclick = function() {
     };
     
     // make the request
-    request.open('GET', 'http://jithinpj.imad.hasura-app.io', true);
+    request.open('GET', 'http://darkfist.imad.hasura-app.io/container', true);
     request.send(null);
 };
 
