@@ -62,7 +62,7 @@ border-radius: 0px!important;
 
 #home-sec {
     
-    background: url(home.jpg) no-repeat center center;
+    background: url(https://lh3.googleusercontent.com/NaFPKOuM4ntE9zif1h-46o_AWXIRQtg4JMTfgjNDLvaQadlWZaUEtBAhrMTw_TMdCnDZXuASV00UK5A=w1366-h662-rw) no-repeat center center;
 padding: 0;
 -webkit-background-size: cover;
 background-size: cover;
